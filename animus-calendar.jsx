@@ -1,30 +1,30 @@
 function getWeeksInMonth(year, month) {
-	const weeks = [],
-	firstDate = new Date(year, month, 1),
-	lastDate = new Date(year, month + 1, 0),
-	numDays = lastDate.getDate();
+	const weeks = [];
+	const firstDate = new Date(year, month, 1);
+	const lastDate = new Date(year, month + 1, 0);
+	const numDays = lastDate.getDate();
 
 	let dayOfWeekCounter = firstDate.getDay();
 
 	for (let date = 1; date <= numDays; date++) {
-	if (dayOfWeekCounter === 0 || weeks.length === 0) {
-		weeks.push([]);
+		if (dayOfWeekCounter === 0 || weeks.length === 0) {
+			weeks.push([]);
+		}
+		weeks[weeks.length - 1].push(date);
+		dayOfWeekCounter = (dayOfWeekCounter + 1) % 7;
 	}
-	weeks[weeks.length - 1].push(date);
-	dayOfWeekCounter = (dayOfWeekCounter + 1) % 7;
-	}
-	let firstWeek = weeks[0];
-	let lastWeek = weeks[weeks.length - 1];
-	let firstWeekMakeup = 7 - firstWeek.length;
-	let lastWeekMakeup = 7 - lastWeek.length;
-
+	const firstWeek = weeks[0];
+	const lastWeek = weeks[weeks.length - 1];
+	const firstWeekMakeup = 7 - firstWeek.length;
+	const lastWeekMakeup = 7 - lastWeek.length;
+	
 	for (let i = 0; i < firstWeekMakeup; i++) {
 		firstWeek.unshift("");
 	}
 	for (let i = 0; i < lastWeekMakeup; i++) {
 		lastWeek.push("");
 	}
-	return weeks
+	return weeks;
 }
 
 export const styles = `
@@ -68,8 +68,8 @@ export const styles = `
 		height:2em;
 		width:2em;
 		border-radius:50%;
-		top:.02em;
-		left:.14em;
+		top: calc(50% - 1em);
+		left: calc(50% - 1em);
 		background:rgba(0,0,0,0.4);
 	}
 `;
